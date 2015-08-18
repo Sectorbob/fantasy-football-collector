@@ -1,0 +1,60 @@
+group 'net.sectorbob'
+version '1.0.0.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = 'gs-spring-boot'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.jsoup:jsoup:1.8.3'
+    compile 'joda-time:joda-time:2.8.2'
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.43.1'
+    compile 'org.seleniumhq.selenium:selenium-support:2.43.1'
+    compile 'org.seleniumhq.selenium:selenium-firefox-driver:2.43.1'
+    compile 'com.github.detro:phantomjsdriver:1.2.0'
+
+    // Spring Stuff
+    compile 'org.springframework.security.oauth:spring-security-oauth2:2.0.7.RELEASE'
+    compile 'org.springframework.security:spring-security-core'
+    compile 'org.springframework.security:spring-security-web'
+
+
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.boot:spring-boot-starter-logging")
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+
+    // Test
+    testCompile("junit:junit:4.11")
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+
