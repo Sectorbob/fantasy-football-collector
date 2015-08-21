@@ -155,8 +155,11 @@ public class FantasyGodsLeagueClient {
             roster.setPlayerIds(new ArrayList<>());
             data.forEach((row) -> {
                 try {
-                    roster.getPlayerIds().add(Util.extractPlayerIdFromPlayerLinkCell((LinkTableCellData) row.get("Player")));
-                } catch(Exception e) {
+                    TableCellData cell = row.get("Player");
+                    if (cell instanceof LinkTableCellData) {
+                        roster.getPlayerIds().add(Util.extractPlayerIdFromPlayerLinkCell((LinkTableCellData) cell));
+                    }
+                } catch (Exception e) {
                     LOG.error("Unknown exceoption when parsing the id from the player link", e);
                 }
             });
